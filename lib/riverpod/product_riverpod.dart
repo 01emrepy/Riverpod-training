@@ -3,65 +3,46 @@ import 'package:flutter_riverpod_e_commerce/model/product_model.dart';
 
 class ProductRiverpod extends ChangeNotifier {
   List<ProductModel> products = [];
+  List<ProductModel> favorites = [];
+  List<ProductModel> basketProducts = [];
+  double totalPrice = 0.0;
+
+  void setTotalPrice(ProductModel model) {
+    totalPrice += model.price;
+  }
+
+  void setFavorite(ProductModel model) {
+    if (model.isFavorite) {
+      model.isFavorite = false;
+      favorites.remove(model);
+      notifyListeners();
+    } else {
+      model.isFavorite = true;
+      favorites.add(model);
+      notifyListeners();
+    }
+  }
+
+  void addedBasket(ProductModel model) {
+    basketProducts.add(model);
+    setTotalPrice(model);
+    SnackBar(
+      content: Text("${model.title} başarıyla sepete eklendi"),
+    );
+  }
 
   void init() {
-    products = [
-      const ProductModel(
-        title: 'Nike Air Max 270',
-        description: 'Nike Air Max 270',
-        imageUrl:
-            'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/3b3b3b3a-1b1a-4f3e-9f3c-3f3f3f3f3f3f/air-max-270-react-mens-shoe-1JZxJx.jpg',
-        price: 120,
-        isFavorite: false,
-      ),
-      const ProductModel(
-        title: 'Nike Air Max 270',
-        description: 'Nike Air Max 270',
-        imageUrl:
-            'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/3b3b3b3a-1b1a-4f3e-9f3c-3f3f3f3f3f3f/air-max-270-react-mens-shoe-1JZxJx.jpg',
-        price: 120,
-        isFavorite: false,
-      ),
-      const ProductModel(
-        title: 'Nike Air Max 270',
-        description: 'Nike Air Max 270',
-        imageUrl:
-            'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/3b3b3b3a-1b1a-4f3e-9f3c-3f3f3f3f3f3f/air-max-270-react-mens-shoe-1JZxJx.jpg',
-        price: 120,
-        isFavorite: false,
-      ),
-      const ProductModel(
-        title: 'Nike Air Max 270',
-        description: 'Nike Air Max 270',
-        imageUrl:
-            'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/3b3b3b3a-1b1a-4f3e-9f3c-3f3f3f3f3f3f/air-max-270-react-mens-shoe-1JZxJx.jpg',
-        price: 120,
-        isFavorite: false,
-      ),
-      const ProductModel(
-        title: 'Nike Air Max 270',
-        description: 'Nike Air Max 270',
-        imageUrl:
-            'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/3b3b3b3a-1b1a-4f3e-9f3c-3f3f3f3f3f3f/air-max-270-react-mens-shoe-1JZxJx.jpg',
-        price: 120,
-        isFavorite: false,
-      ),
-      const ProductModel(
-        title: 'Nike Air Max 270',
-        description: 'Nike Air Max 270',
-        imageUrl:
-            'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/3b3b3b3a-1b1a-4f3e-9f3c-3f3f3f3f3f3f/air-max-270-react-mens-shoe-1JZxJx.jpg',
-        price: 120,
-        isFavorite: false,
-      ),
-      const ProductModel(
-        title: 'Nike Air Max 270',
-        description: 'Nike Air Max 270',
-        imageUrl:
-            'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/3b3b3b3a-1b1a-4f3e-9f3c-3f3f3f3f3f3f/air-max-270-react-mens-shoe-1JZxJx.jpg',
-        price: 120,
-        isFavorite: false,
-      )
-    ];
+    for (int i = 0; i < 10; i++) {
+      products.add(
+        ProductModel(
+          isFavorite: false,
+          title: "Xiaomi ${i + 1}",
+          description: "${8 + (i * 2)} MP kameralı ve 55${i * 10} mAh batarya",
+          price: 6000.0 + (i * 10),
+          imagePath:
+              "https://cdn.vatanbilgisayar.com/Upload/PRODUCT/xiaomi/thumb/2_5_thumb.jpg",
+        ),
+      );
+    }
   }
 }
