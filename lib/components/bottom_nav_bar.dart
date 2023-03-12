@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod_e_commerce/riverpod_manager.dart';
+import 'package:flutter_riverpod_e_commerce/viewmodel/riverpod_manager.dart';
 
 class BottomNavBar extends ConsumerWidget {
   const BottomNavBar({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod_e_commerce/core/components/product_widget.dart';
-import 'package:flutter_riverpod_e_commerce/riverpod_manager.dart';
+import 'package:flutter_riverpod_e_commerce/components/product_widget.dart';
+import 'package:flutter_riverpod_e_commerce/viewmodel/riverpod_manager.dart';
 
 class CartPage extends ConsumerWidget {
   const CartPage({super.key});
