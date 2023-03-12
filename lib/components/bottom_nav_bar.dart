@@ -11,7 +11,7 @@ class BottomNavBar extends ConsumerWidget {
     var read = ref.read(bottomNavBarRiverpod);
     return BottomNavigationBar(
       items: read.items,
-      currentIndex: watch.currentInex,
+      currentIndex: watch.currentIndex,
       onTap: (index) => read.setCurrentIndex(index),
     );
   }
